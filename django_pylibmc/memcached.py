@@ -112,6 +112,9 @@ class PyLibMCCache(BaseMemcachedCache):
         except MemcachedError as e:
             log.error('MemcachedError: %s', e, exc_info=True)
             return default
+        except UnicodeDecodeError as e:
+            log.error('Failed to decode cache value: %s', e, exc_info=True)
+            return default
 
     def set(self, key, value, timeout=DEFAULT_TIMEOUT, version=None):
         key = self.make_key(key, version=version)
