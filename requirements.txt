@@ -24,3 +24,5 @@ pyroma==2.3
 
 # Multi-env test runner
 tox==2.9.1
+
+six==1.11.0
