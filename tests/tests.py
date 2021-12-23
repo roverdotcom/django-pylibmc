@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import sys
+import six
 import time
 from unittest import skipIf
 
@@ -26,7 +26,6 @@ except ImportError:
     import pickle
 
 
-PY3 = sys.version_info[0] == 3
 
 
 # functions/classes for complex data type tests
@@ -494,7 +493,7 @@ class PylibmcCacheTests(TestCase):
     def test_get_or_set_version(self):
         msg = (
             "get_or_set() missing 1 required positional argument: 'default'"
-            if PY3
+            if six.PY3
             else 'get_or_set() takes at least 3 arguments'
         )
         self.cache.get_or_set('brian', 1979, version=2)
