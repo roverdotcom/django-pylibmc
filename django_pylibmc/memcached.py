@@ -92,7 +92,7 @@ class PyLibMCCache(BaseMemcachedCache):
 
         return super(PyLibMCCache, self).get_backend_timeout(timeout)
 
-    def add(self, key, value, timeout=DEFAULT_TIMEOUT, version=None):
+    def add(self, key, value, timeout=DEFAULT_TIMEOUT, version=None, isSuppressMemcachedError=True):
         key = self.make_key(key, version=version)
         try:
             return self._cache.add(key, value,
@@ -104,7 +104,9 @@ class PyLibMCCache(BaseMemcachedCache):
             return False
         except MemcachedError as e:
             log.error('MemcachedError: %s', e, exc_info=True)
-            return False
+            if isSuppressMemcachedError:
+                return False
+            raise
 
     def get(self, key, default=None, version=None):
         try:
