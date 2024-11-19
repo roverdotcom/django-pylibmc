@@ -9,7 +9,7 @@ Django>=1.8,<2.1
 -e .
 
 # Packaging
-wheel==0.30.0
+wheel==0.38.1
 twine==1.9.1
 
 # PEP8, PEP257, and static analysis
